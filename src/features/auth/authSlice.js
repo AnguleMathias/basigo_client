@@ -14,21 +14,18 @@ const initialState = {
 };
 
 // sign up user
-export const signUp = createAsyncThunk(
-  "auth/register",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.register(user);
-    } catch (err) {
-      const message =
-        (err.response && err.response.data && err.response.data.message) ||
-        err.message ||
-        err.toString();
+export const signUp = createAsyncThunk("/signup", async (user, thunkAPI) => {
+  try {
+    return await authService.signUp(user);
+  } catch (err) {
+    const message =
+      (err.response && err.response.data && err.response.data.message) ||
+      err.message ||
+      err.toString();
 
-      return thunkAPI.rejectWithValue(message);
-    }
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 export const authSlice = createSlice({
   name: "auth",
