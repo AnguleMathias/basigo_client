@@ -18,10 +18,18 @@ export const login = createAsyncThunk("/login", async (user, thunkAPI) => {
   try {
     return await loginService.login(user);
   } catch (err) {
-    const message = err.response.data.message;
+    const message =
+      (err.response && err.response.data && err.response.data.message) ||
+      err.message ||
+      err.toString();
 
     return thunkAPI.rejectWithValue(message);
   }
+});
+
+// logout user
+export const logout = createAsyncThunk("/logout", async () => {
+  await loginService.logout();
 });
 
 export const loginSlice = createSlice({
@@ -50,6 +58,9 @@ export const loginSlice = createSlice({
         state.isError = true;
         state.user = null;
         state.message = action.payload;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
       });
   },
 });

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { logout, reset } from "../features/auth/logout/logoutSlice";
+import { logout, reset } from "../features/auth/login/loginSlice";
 
 const Header = () => {
   const navigate = useNavigate();
