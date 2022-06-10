@@ -12,7 +12,6 @@ const Login = () => {
   const onChange = (e) => {
     setLogInData({ ...logInData, [e.target.name]: e.target.value });
   };
-  console.log("logInData", logInData);
 
   const onSubmit = (e) => {
     e.preventDefault();
