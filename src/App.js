@@ -1,24 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
-    <>
-      <Router>
-        <div className="container">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </div>
-      </Router>
-    </>
+    <Router>
+      <div className="container">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 

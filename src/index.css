@@ -13,7 +13,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: #1f456e;
 }
 
 p {
@@ -137,9 +137,9 @@ h3 {
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 1px solid #1f456e;
   border-radius: 5px;
-  background: #000;
+  background: #1f456e;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -157,7 +157,7 @@ h3 {
 
 .btn-reverse {
   background: #fff;
-  color: #000;
+  color: #1f456e;
 }
 
 .btn-block {
@@ -186,7 +186,7 @@ h3 {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #000 transparent #555 transparent;
+  border-color: #1f456e transparent #555 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
