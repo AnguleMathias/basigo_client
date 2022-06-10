@@ -14,7 +14,6 @@ const Register = () => {
   const onChange = (e) => {
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   };
-  console.log("signUpData", signUpData);
 
   const onSubmit = (e) => {
     e.preventDefault();
