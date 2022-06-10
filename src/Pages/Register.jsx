@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 
-import { signUp, reset } from "../features/auth/authSlice";
+import { signUp, reset } from "../features/auth/signup/signupSlice";
 import Spinner from "../components/Spinner";
 
 const Register = () => {
@@ -17,11 +17,13 @@ const Register = () => {
 
   const { username, email, password, passwordConfirm } = signUpData;
 
+  const isButtonDisabled = !username || !email || !password || !passwordConfirm;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state) => state.signup
   );
 
   const onChange = (e) => {
@@ -114,7 +116,11 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-block">
+            <button
+              type="submit"
+              className="btn btn-block"
+              disabled={isButtonDisabled}
+            >
               Sign Up
             </button>
           </div>
