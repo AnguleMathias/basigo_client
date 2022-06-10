@@ -11,13 +11,26 @@ const createLead = async (leadData, token) => {
   };
 
   const response = await axios.post(`${API_URL}/leads`, leadData, config);
-  console.log("response.data", response.data);
+
+  return response.data;
+};
+
+// get all leads
+const getLeads = async (token) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const response = await axios.get(`${API_URL}/leads`, config);
 
   return response.data;
 };
 
 const leadsService = {
   createLead,
+  getLeads,
 };
 
 export default leadsService;

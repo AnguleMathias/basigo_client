@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createLead } from "../features/Leads/leadsSlice";
+import { createLead } from "../features/leads/leadsSlice";
 
 const LeadForm = ({ user }) => {
   const [leadData, setLeadData] = useState({

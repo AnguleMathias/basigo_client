@@ -16,15 +16,16 @@ export const createLead = createAsyncThunk(
     try {
       const token = thunkAPI.getState().login.user.token;
       return await leadsService.createLead(leadData, token);
-    } catch (err) {}
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
   }
 );
-
-// get all Leads
-export const getLeads = createAsyncThunk("/leads", async (_, thunkAPI) => {
-  try {
-  } catch (err) {}
-});
 
 export const leadsSlice = createSlice({
   name: "leads",
