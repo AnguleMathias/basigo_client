@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -6,8 +6,11 @@ import { getLeads, reset } from "../features/leads/getAllLeadsSlice";
 import LeadForm from "../components/LeadForm";
 import LeadItem from "../components/LeadItem";
 import Spinner from "../components/Spinner";
+import ModalWrap from "../components/ModalWrap";
 
 const Dashboard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -15,6 +18,10 @@ const Dashboard = () => {
   const { leads, isLoading, isError, message } = useSelector(
     (state) => state.leads
   );
+
+  const handleAddLeadButton = () => {
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -36,9 +43,20 @@ const Dashboard = () => {
     <>
       <section className="heading">
         <h1>Hello {user?.user?.username}</h1>
-        <p>Leads Dashboard</p>
+        <p>
+          <span>Leads Dashboard</span>
+          <span>
+            <button className="btn" onClick={handleAddLeadButton}>Create Lead</button>
+          </span>
+        </p>
       </section>
-      <LeadForm user={user?.user?.email} />
+      <ModalWrap
+        title="Create Lead"
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <LeadForm user={user?.user?.email} />
+      </ModalWrap>
       <section className="content">
         {leads.length > 0 ? (
           <div className="leads">
