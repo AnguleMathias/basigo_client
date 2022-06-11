@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getLeads, reset } from "../features/leads/getAllLeadsSlice";
 import LeadForm from "../components/LeadForm";
-import LeadItem from "../components/LeadItem";
-import Spinner from "../components/Spinner";
 import ModalWrap from "../components/ModalWrap";
+import Spinner from "../components/Spinner";
+import UserCard from "../components/Card/LeadCard";
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,8 +45,10 @@ const Dashboard = () => {
         <h1>Hello {user?.user?.username}</h1>
         <p>
           <span>Leads Dashboard</span>
-          <span>
-            <button className="btn" onClick={handleAddLeadButton}>Create Lead</button>
+          <span style={{ float: "right" }}>
+            <button className="btn" onClick={handleAddLeadButton}>
+              Create Lead
+            </button>
           </span>
         </p>
       </section>
@@ -61,7 +63,7 @@ const Dashboard = () => {
         {leads.length > 0 ? (
           <div className="leads">
             {leads[0].map((lead, index) => (
-              <LeadItem key={`${lead.id}-${index}`} lead={lead} />
+              <UserCard key={lead.id} lead={lead} />
             ))}
           </div>
         ) : (

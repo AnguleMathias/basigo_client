@@ -43,7 +43,7 @@ const Login = () => {
     }
 
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/leads");
     }
 
     dispatch(reset());

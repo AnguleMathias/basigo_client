@@ -42,6 +42,7 @@ const LeadForm = ({ user }) => {
     };
 
     dispatch(createLead(leadData));
+    window.location.reload();
   };
 
   return (
