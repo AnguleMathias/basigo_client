@@ -28,6 +28,19 @@ const getLeads = async (token) => {
   return response.data;
 };
 
+// get lead by id
+const getLeadById = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const response = await axios.get(`${API_URL}/leads/${id}`, config);
+
+  return response.data;
+};
+
 // delete lead
 const deleteLead = async (id, token) => {
   const config = {
@@ -44,6 +57,7 @@ const deleteLead = async (id, token) => {
 const leadsService = {
   createLead,
   deleteLead,
+  getLeadById,
   getLeads,
 };
 

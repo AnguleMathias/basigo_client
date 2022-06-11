@@ -44,7 +44,7 @@ const Dashboard = () => {
       <section className="heading">
         <h1>Hello {user?.user?.username}</h1>
         <p>
-          <span>Leads Dashboard</span>
+          <span>Leads</span>
           <span style={{ float: "right" }}>
             <button className="btn" onClick={handleAddLeadButton}>
               Create Lead

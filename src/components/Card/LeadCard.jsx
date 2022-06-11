@@ -1,20 +1,31 @@
 import { FaTrash } from "react-icons/fa";
 import { Flex, Image, IconButton, Text } from "@chakra-ui/core";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { deleteLead } from "../../features/leads/deleteLeadSlice";
 import Card from "./Card";
 
 const LeadCard = ({ lead }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     dispatch(deleteLead(lead.id));
     window.location.reload();
   };
 
+  const handleNavigateToLead = () => {
+    navigate(`/leads/${lead.id}`);
+  };
+
   return (
-    <Flex width="320px" alignItems="center" position="relative" className="user-card">
+    <Flex
+      width="320px"
+      alignItems="center"
+      position="relative"
+      className="user-card"
+    >
       <Card
         m={2}
         width="100%"
@@ -22,13 +33,7 @@ const LeadCard = ({ lead }) => {
         flexDirection="row"
         cursor="pointer"
       >
-        <Flex
-          width="160px"
-          position="relative"
-          onClick={() => {
-            console.log("clicked card");
-          }}
-        >
+        <Flex width="160px" position="relative" onClick={handleNavigateToLead}>
           <Image
             style={{ objectFit: "cover" }}
             width="100%"
@@ -37,9 +42,7 @@ const LeadCard = ({ lead }) => {
           />
         </Flex>
         <Flex
-          onClick={() => {
-            console.log("clicked card");
-          }}
+          onClick={handleNavigateToLead}
           paddingLeft={2}
           width="60%"
           bg="white"
