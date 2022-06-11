@@ -15,6 +15,7 @@ const Header = () => {
     await dispatch(logout());
     dispatch(reset());
     navigate("/login");
+    window.location.reload();
   };
 
   return (

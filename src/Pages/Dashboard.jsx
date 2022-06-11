@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 import { getLeads, reset } from "../features/leads/getAllLeadsSlice";
 import LeadForm from "../components/LeadForm";
@@ -16,13 +15,8 @@ const Dashboard = () => {
   const { leads, isLoading, isError, message } = useSelector(
     (state) => state.leads
   );
-  console.log("leads", leads);
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
     if (!user) {
       navigate("/login");
     }
@@ -45,12 +39,11 @@ const Dashboard = () => {
         <p>Leads Dashboard</p>
       </section>
       <LeadForm user={user?.user?.email} />
-
       <section className="content">
         {leads.length > 0 ? (
           <div className="leads">
-            {leads.map((lead) => (
-              <LeadItem key={lead.id} lead={lead} />
+            {leads[0].map((lead, index) => (
+              <LeadItem key={`${lead.id}-${index}`} lead={lead} />
             ))}
           </div>
         ) : (

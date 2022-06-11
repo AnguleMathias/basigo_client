@@ -28,8 +28,22 @@ const getLeads = async (token) => {
   return response.data;
 };
 
+// delete lead
+const deleteLead = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const response = await axios.delete(`${API_URL}/leads/${id}`, config);
+
+  return response.data;
+};
+
 const leadsService = {
   createLead,
+  deleteLead,
   getLeads,
 };
 
