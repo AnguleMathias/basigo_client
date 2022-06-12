@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/");
     }
 
     dispatch(getLeads());

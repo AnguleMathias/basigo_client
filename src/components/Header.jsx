@@ -14,7 +14,7 @@ const Header = () => {
   const onLogout = async () => {
     await dispatch(logout());
     dispatch(reset());
-    navigate("/login");
+    navigate("/");
     window.location.reload();
   };
 
@@ -33,7 +33,7 @@ const Header = () => {
         ) : (
           <>
             <li>
-              <Link to="/login">
+              <Link to="/">
                 <FaSignInAlt /> Login
               </Link>
             </li>
