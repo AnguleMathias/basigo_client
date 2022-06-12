@@ -20,14 +20,14 @@ const createCustomer = async (customerData, token) => {
 };
 
 // get all customers
-const getAllLeadCustomers = async (token) => {
+const getAllLeadCustomers = async (id, token) => {
   const config = {
     headers: {
       Authorization: token,
     },
   };
 
-  const response = await axios.get(`${API_URL}/customer`, config);
+  const response = await axios.get(`${API_URL}/lead/${id}/customer`, config);
 
   return response.data;
 };

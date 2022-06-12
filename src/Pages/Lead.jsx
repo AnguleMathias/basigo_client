@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Flex, Image, Text, Grid } from "@chakra-ui/core";
 
 import {
-  getCustomers,
+  getCustomer,
   reset as resetCustomersAction,
 } from "../features/customers/getAllCustomersSlice";
 
@@ -30,7 +30,7 @@ const LeadView = () => {
     (state) => state.customers
   );
 
-  console.log("customers", customers);
+  console.log("customers 2", customers);
 
   let lead = [];
 
@@ -49,8 +49,8 @@ const LeadView = () => {
       navigate("/leads");
     }
 
+    dispatch(getCustomer(id));
     dispatch(getLeads());
-    dispatch(getCustomers());
 
     return () => {
       dispatch(resetLeads());
