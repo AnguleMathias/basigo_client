@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Flex, Image, Text, Grid } from "@chakra-ui/core";
@@ -12,10 +12,13 @@ import {
   getLeads,
   reset as resetLeads,
 } from "../features/leads/getAllLeadsSlice";
-import Spinner from "../components/Spinner";
 import CustomerCard from "../components/Card/CustomerCard";
+import CustomerForm from "../components/CustomerForm";
+import ModalWrap from "../components/ModalWrap";
+import Spinner from "../components/Spinner";
 
 const LeadView = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,6 +39,10 @@ const LeadView = () => {
   }
 
   const leadData = lead[0];
+
+  const handleButtonClick = () => {
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -82,6 +89,20 @@ const LeadView = () => {
       </Flex>
       <Flex mt={8} flexDirection="column">
         <h3>Customers</h3>
+        <p>
+          <span style={{ float: "right" }}>
+            <button className="btn" onClick={handleButtonClick}>
+              Create Customer
+            </button>
+          </span>
+        </p>
+        <ModalWrap
+          title="Create Customer"
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        >
+          <CustomerForm lead={leadData && leadData.id} />
+        </ModalWrap>
         <Grid
           gridTemplateColumns="repeat(2, 1fr)"
           gap="10px"

@@ -1,43 +1,77 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createLead } from "../features/leads/leadsSlice";
+import { createCustomer } from "../features/customers/customersSlice";
 
-const LeadForm = ({ user }) => {
-  const [leadData, setLeadData] = useState({
+const CustomerForm = ({ lead }) => {
+  const [customerData, setCustomerData] = useState({
     firstName: "",
     middleName: "",
     lastName: "",
     phone: "",
     location: "",
     gender: "",
+    photo: "",
+    annualEarnings: "",
+    productsOfInterest: "",
+    leadId: lead,
   });
+  console.log("lead", lead);
 
-  const { firstName, middleName, lastName, phone, location, gender } = leadData;
+  const {
+    firstName,
+    middleName,
+    lastName,
+    phone,
+    photo,
+    location,
+    gender,
+    leadId,
+    annualEarnings,
+    productsOfInterest,
+  } = customerData;
 
   const dispatch = useDispatch();
 
   const onChange = (e) => {
-    setLeadData({ ...leadData, [e.target.name]: e.target.value });
+    setCustomerData({ ...customerData, [e.target.name]: e.target.value });
   };
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const leadData = {
+    const customerData = {
       firstName,
       middleName,
       lastName,
       phone,
+      photo,
       location,
       gender,
+      leadId,
+      annualEarnings,
+      productsOfInterest,
     };
+    console.log("customerData", customerData);
 
-    dispatch(createLead(leadData));
-    window.location.reload();
+    dispatch(createCustomer(customerData));
+    // window.location.reload();
   };
 
   return (
     <section className="form">
       <form onSubmit={onSubmit}>
+        <div className="form-group">
+          <label htmlFor="photo" className="text">
+            Photo
+          </label>
+          <input
+            type="text"
+            name="photo"
+            id="photo"
+            value={photo}
+            onChange={onChange}
+            placeholder="Enter photo..."
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="firstName" className="text">
             First name
@@ -48,7 +82,7 @@ const LeadForm = ({ user }) => {
             id="firstName"
             value={firstName}
             onChange={onChange}
-            placeholder="Enter your first name..."
+            placeholder="Enter first name..."
           />
         </div>
         <div className="form-group">
@@ -61,7 +95,7 @@ const LeadForm = ({ user }) => {
             id="middleName"
             value={middleName}
             onChange={onChange}
-            placeholder="Enter your middle name..."
+            placeholder="Enter middle name..."
           />
         </div>
         <div className="form-group">
@@ -74,7 +108,7 @@ const LeadForm = ({ user }) => {
             id="lastName"
             value={lastName}
             onChange={onChange}
-            placeholder="Enter your last name..."
+            placeholder="Enter last name..."
           />
         </div>
         <div className="form-group">
@@ -100,7 +134,33 @@ const LeadForm = ({ user }) => {
             id="location"
             value={location}
             onChange={onChange}
-            placeholder="Enter your location..."
+            placeholder="Enter location..."
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="annualEarnings" className="text">
+            Annual earnings
+          </label>
+          <input
+            type="text"
+            name="annualEarnings"
+            id="annualEarnings"
+            value={annualEarnings}
+            onChange={onChange}
+            placeholder="Enter annual earnings..."
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="productsOfInterest" className="text">
+            Products of interest
+          </label>
+          <input
+            type="text"
+            name="productsOfInterest"
+            id="productsOfInterest"
+            value={productsOfInterest}
+            onChange={onChange}
+            placeholder="Enter products of interest..."
           />
         </div>
         <div className="form-group">
@@ -115,7 +175,7 @@ const LeadForm = ({ user }) => {
 
         <div className="form-group">
           <button className="btn btn-block" type="submit">
-            Create Lead
+            Create Customer
           </button>
         </div>
       </form>
@@ -123,4 +183,4 @@ const LeadForm = ({ user }) => {
   );
 };
 
-export default LeadForm;
+export default CustomerForm;
