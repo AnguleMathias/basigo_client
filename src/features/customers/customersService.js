@@ -58,11 +58,11 @@ const deleteCustomer = async (id, token) => {
   return response.data;
 };
 
-const leadsService = {
+const customersService = {
   createCustomer,
   deleteCustomer,
   getCustomerById,
   getAllLeadCustomers,
 };
 
-export default leadsService;
+export default customersService;

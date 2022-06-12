@@ -1,6 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 import { createCustomer } from "../features/customers/customersSlice";
+import { getProducts, reset } from "../features/products/productsSlice";
+import Spinner from "./Spinner";
 
 const CustomerForm = ({ lead }) => {
   const [customerData, setCustomerData] = useState({
@@ -15,7 +19,6 @@ const CustomerForm = ({ lead }) => {
     productsOfInterest: "",
     leadId: lead,
   });
-  console.log("lead", lead);
 
   const {
     firstName,
@@ -31,6 +34,10 @@ const CustomerForm = ({ lead }) => {
   } = customerData;
 
   const dispatch = useDispatch();
+
+  const { products, isLoading, isError, message } = useSelector(
+    (state) => state.products
+  );
 
   const onChange = (e) => {
     setCustomerData({ ...customerData, [e.target.name]: e.target.value });
@@ -50,11 +57,26 @@ const CustomerForm = ({ lead }) => {
       annualEarnings,
       productsOfInterest,
     };
-    console.log("customerData", customerData);
 
     dispatch(createCustomer(customerData));
-    // window.location.reload();
+    window.location.reload();
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    dispatch(getProducts());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [dispatch, isError, message]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <section className="form">
@@ -154,14 +176,18 @@ const CustomerForm = ({ lead }) => {
           <label htmlFor="productsOfInterest" className="text">
             Products of interest
           </label>
-          <input
-            type="text"
+          <select
             name="productsOfInterest"
             id="productsOfInterest"
-            value={productsOfInterest}
             onChange={onChange}
-            placeholder="Enter products of interest..."
-          />
+          >
+            {products &&
+              products.map((product) => (
+                <option key={product.id} value={product.title}>
+                  {product.title} ({product.shortDescription})
+                </option>
+              ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="gender" className="text">
