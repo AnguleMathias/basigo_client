@@ -39,9 +39,9 @@ export const customersSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getCustomers.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isSuccess = true;
-        state.leads = action.payload;
+        state.isLoading = false;
+        state.customers = action.payload;
       })
       .addCase(getCustomers.rejected, (state, action) => {
         state.isLoading = false;

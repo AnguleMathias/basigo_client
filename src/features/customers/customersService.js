@@ -10,7 +10,11 @@ const createCustomer = async (customerData, token) => {
     },
   };
 
-  const response = await axios.post(`${API_URL}/customer`, customerData, config);
+  const response = await axios.post(
+    `${API_URL}/customer`,
+    customerData,
+    config
+  );
 
   return response.data;
 };

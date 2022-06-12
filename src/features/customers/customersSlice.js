@@ -41,7 +41,7 @@ export const customersSlice = createSlice({
       .addCase(createCustomer.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.leads.push(action.payload);
+        state.customers.push(action.payload);
       })
       .addCase(createCustomer.rejected, (state, action) => {
         state.isLoading = false;

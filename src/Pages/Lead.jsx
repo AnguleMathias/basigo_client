@@ -2,35 +2,57 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Flex, Image, Text, Grid } from "@chakra-ui/core";
-import { FaMapMarkerAlt } from "react-icons/fa";
 
-import { getLeadById, reset } from "../features/leads/getLeadByIdSlice";
+import {
+  getCustomers,
+  reset as resetCustomersAction,
+} from "../features/customers/getAllCustomersSlice";
+
+import {
+  getLeads,
+  reset as resetLeads,
+} from "../features/leads/getAllLeadsSlice";
 import Spinner from "../components/Spinner";
 import CustomerCard from "../components/Card/CustomerCard";
 
 const LeadView = () => {
   const { id } = useParams();
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const leads = useSelector((state) => state.getLeadById);
-  // console.log(leads);
+  const { user } = useSelector((state) => state.login);
 
-  // useEffect(() => {
-  //   if (!leads) {
-  //     navigate("/");
-  //   }
+  const { leads, isLoading } = useSelector((state) => state.leads);
+  const { customers, isLoading: customersLoading } = useSelector(
+    (state) => state.customers
+  );
 
-  //   dispatch(getLeadById(id));
+  console.log("customers", customers);
 
-  //   return () => {
-  //     dispatch(reset());
-  //   };
-  // }, [leads, dispatch, navigate]);
+  let lead = [];
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
+  if (leads.length > 0) {
+    lead = leads[0].filter((lead) => lead.id === Number(id));
+  }
+
+  const leadData = lead[0];
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/leads");
+    }
+
+    dispatch(getLeads());
+    dispatch(getCustomers());
+
+    return () => {
+      dispatch(resetLeads());
+    };
+  }, [id, dispatch, user, navigate]);
+
+  if (isLoading || customersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -41,18 +63,19 @@ const LeadView = () => {
         <Flex flexDirection="column" ml={8} justifySelf="start">
           <Flex>
             <Text fontSize="26px" fontWeight={600}>
-              Name: name of lead here
+              Name: {leadData && leadData.firstName}{" "}
+              {leadData && leadData.middleName} {leadData && leadData.lastName}
             </Text>
           </Flex>
           <Flex>
             <Text mt={4} fontSize="18px">
-              Location: location
+              Location: {leadData && leadData.location}
             </Text>
           </Flex>
-
           <Flex>
             <Text mt={4} fontSize="18px">
-              Start Date: Date created here
+              Start Date:{" "}
+              {new Date(leadData && leadData.createdAt).toLocaleDateString()}
             </Text>
           </Flex>
         </Flex>
