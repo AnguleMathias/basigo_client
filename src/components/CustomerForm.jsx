@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { Input } from "@chakra-ui/core";
 
 import { createCustomer } from "../features/customers/customersSlice";
 import { getProducts, reset } from "../features/products/productsSlice";
@@ -81,24 +82,45 @@ const CustomerForm = ({ lead }) => {
   return (
     <section className="form">
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="photo" className="text">
-            Photo
-          </label>
+        <div className="profile profile-theme-dragdropbox">
           <input
-            type="text"
+            style={{
+              zIndex: "999",
+              opacity: "0",
+              width: "320px",
+              height: "200px",
+              position: "absolute",
+              right: "0px",
+              left: "0px",
+              marginRight: "auto",
+              marginLeft: "auto",
+            }}
             name="photo"
             id="photo"
-            value={photo}
+            type="file"
             onChange={onChange}
-            placeholder="Enter photo..."
+            accept="image/png, image/jpeg"
           />
+          <div className="profile-input-dragDrop">
+            <div className="profile-input-inner">
+              <div className="profile-input-icon">
+                <i className="fa fa-file-image-o"></i>
+              </div>
+              <div className="profile-input-text">
+                <h3>Drop Image here</h3>{" "}
+                <span style={{ display: "inline-block", margin: "15px 0" }}>
+                  or
+                </span>
+              </div>
+              <span className="profile-input-choose-btn blue">Browse Files</span>
+            </div>
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="firstName" className="text">
             First name
           </label>
-          <input
+          <Input
             type="text"
             name="firstName"
             id="firstName"
@@ -111,7 +133,7 @@ const CustomerForm = ({ lead }) => {
           <label htmlFor="middleName" className="text">
             Middle name
           </label>
-          <input
+          <Input
             type="text"
             name="middleName"
             id="middleName"
@@ -124,7 +146,7 @@ const CustomerForm = ({ lead }) => {
           <label htmlFor="lastName" className="text">
             Last name
           </label>
-          <input
+          <Input
             type="text"
             name="lastName"
             id="lastName"
@@ -137,7 +159,7 @@ const CustomerForm = ({ lead }) => {
           <label htmlFor="phone" className="text">
             Phone number
           </label>
-          <input
+          <Input
             type="phone"
             name="phone"
             id="phone"
@@ -150,7 +172,7 @@ const CustomerForm = ({ lead }) => {
           <label htmlFor="location" className="text">
             Location
           </label>
-          <input
+          <Input
             type="text"
             name="location"
             id="location"
@@ -163,7 +185,7 @@ const CustomerForm = ({ lead }) => {
           <label htmlFor="annualEarnings" className="text">
             Annual earnings
           </label>
-          <input
+          <Input
             type="text"
             name="annualEarnings"
             id="annualEarnings"
