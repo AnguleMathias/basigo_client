@@ -28,7 +28,7 @@ export const createCustomer = createAsyncThunk(
 );
 
 export const customersSlice = createSlice({
-  name: "customers",
+  name: "customer",
   initialState,
   reducers: {
     reset: (state) => initialState,

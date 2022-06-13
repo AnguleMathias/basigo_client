@@ -7,7 +7,7 @@ import { createCustomer } from "../features/customers/customersSlice";
 import { getProducts, reset } from "../features/products/productsSlice";
 import Spinner from "./Spinner";
 
-const CustomerForm = ({ lead }) => {
+const CustomerForm = ({ lead, setIsModalOpen }) => {
   const [customerData, setCustomerData] = useState({
     firstName: "",
     middleName: "",
@@ -16,7 +16,7 @@ const CustomerForm = ({ lead }) => {
     location: "",
     gender: "",
     photo: "",
-    annualEarnings: "",
+    annualEarning: "",
     productsOfInterest: "",
     leadId: lead,
   });
@@ -30,7 +30,7 @@ const CustomerForm = ({ lead }) => {
     location,
     gender,
     leadId,
-    annualEarnings,
+    annualEarning,
     productsOfInterest,
   } = customerData;
 
@@ -55,11 +55,12 @@ const CustomerForm = ({ lead }) => {
       location,
       gender,
       leadId,
-      annualEarnings,
+      annualEarning,
       productsOfInterest,
     };
 
     dispatch(createCustomer(customerData));
+    setIsModalOpen(false);
     window.location.reload();
   };
 
@@ -112,7 +113,9 @@ const CustomerForm = ({ lead }) => {
                   or
                 </span>
               </div>
-              <span className="profile-input-choose-btn blue">Browse Files</span>
+              <span className="profile-input-choose-btn blue">
+                Browse Files
+              </span>
             </div>
           </div>
         </div>
@@ -182,14 +185,14 @@ const CustomerForm = ({ lead }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="annualEarnings" className="text">
+          <label htmlFor="annualEarning" className="text">
             Annual earnings
           </label>
           <Input
             type="text"
-            name="annualEarnings"
-            id="annualEarnings"
-            value={annualEarnings}
+            name="annualEarning"
+            id="annualEarning"
+            value={annualEarning}
             onChange={onChange}
             placeholder="Enter annual earnings..."
           />

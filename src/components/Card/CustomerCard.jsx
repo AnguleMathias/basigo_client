@@ -3,7 +3,7 @@ import { Flex, Image, IconButton, Text } from "@chakra-ui/core";
 
 import Card from "./Card";
 
-const CustomerCard = ({ lead }) => {
+const CustomerCard = ({ lead, customer }) => {
   const handleDelete = () => {};
 
   const handleNavigateToCustomer = () => {};
@@ -45,15 +45,16 @@ const CustomerCard = ({ lead }) => {
           textAlign="left"
         >
           <Text my={2} fontSize="14px" fontWeight={600}>
-            Customer Name
+            Name: {customer && customer.firstName}{" "}
+            {customer && customer.middleName} {customer && customer.lastName}
           </Text>
           <Text fontSize="12px" maxHeight="60%" overflow="hidden">
             <b>Location: </b>
-            location
+            {customer && customer.location}
           </Text>
           <Text fontSize="12px" mt={4}>
             <b>Tel: </b>
-            phone
+            {customer && customer.phone}
           </Text>
         </Flex>
         <IconButton

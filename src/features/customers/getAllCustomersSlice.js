@@ -9,9 +9,9 @@ const initialState = {
   message: "",
 };
 
-// get all customers
-export const getCustomer = createAsyncThunk(
-  "/customers",
+// get all Leads
+export const getAllLeadCustomers = createAsyncThunk(
+  "/customer",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().login.user.token;
@@ -28,22 +28,22 @@ export const getCustomer = createAsyncThunk(
 );
 
 export const customersSlice = createSlice({
-  name: "getCustomer",
+  name: "getAllLeadCustomers",
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCustomer.pending, (state) => {
+      .addCase(getAllLeadCustomers.pending, (state) => {
         state.isLoading = false;
       })
-      .addCase(getCustomer.fulfilled, (state, action) => {
+      .addCase(getAllLeadCustomers.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.customers = action.payload;
       })
-      .addCase(getCustomer.rejected, (state, action) => {
+      .addCase(getAllLeadCustomers.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

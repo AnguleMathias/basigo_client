@@ -19,6 +19,8 @@ const LeadForm = ({ user }) => {
   const onChange = (e) => {
     setLeadData({ ...leadData, [e.target.name]: e.target.value });
   };
+  const isFormNotComplete = !firstName || !lastName || !phone || !location;
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -112,11 +114,23 @@ const LeadForm = ({ user }) => {
             <option value="Female">Female</option>
           </select>
         </div>
-
         <div className="form-group">
-          <button className="btn btn-block" type="submit">
-            Create Lead
-          </button>
+          {isFormNotComplete ? (
+            <p
+              style={{
+                color: "red",
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "3rem",
+              }}
+            >
+              Complete form to submit!
+            </p>
+          ) : (
+            <button className="btn btn-block" type="submit">
+              Create Lead
+            </button>
+          )}
         </div>
       </form>
     </section>

@@ -62,12 +62,12 @@ const Dashboard = () => {
       <section className="content">
         {leads.length > 0 ? (
           <div className="leads">
-            {leads[0].map((lead, index) => (
+            {leads[0].map((lead) => (
               <UserCard key={lead.id} lead={lead} />
             ))}
           </div>
         ) : (
-          <h3>No leads found</h3>
+          <h3>No leads found. Please create a lead to continue</h3>
         )}
       </section>
     </>

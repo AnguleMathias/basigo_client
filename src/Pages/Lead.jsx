@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Flex, Image, Text, Grid } from "@chakra-ui/core";
 
 import {
-  getCustomer,
-  reset as resetCustomersAction,
+  getAllLeadCustomers,
+  reset as resetCustomers,
 } from "../features/customers/getAllCustomersSlice";
 
 import {
@@ -30,8 +30,6 @@ const LeadView = () => {
     (state) => state.customers
   );
 
-  console.log("customers 2", customers);
-
   let lead = [];
 
   if (leads.length > 0) {
@@ -39,6 +37,7 @@ const LeadView = () => {
   }
 
   const leadData = lead[0];
+  const customersList = customers[0];
 
   const handleButtonClick = () => {
     setIsModalOpen(true);
@@ -49,11 +48,12 @@ const LeadView = () => {
       navigate("/leads");
     }
 
-    dispatch(getCustomer(id));
+    dispatch(getAllLeadCustomers(id));
     dispatch(getLeads());
 
     return () => {
       dispatch(resetLeads());
+      dispatch(resetCustomers());
     };
   }, [id, dispatch, user, navigate]);
 
@@ -101,7 +101,10 @@ const LeadView = () => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         >
-          <CustomerForm lead={leadData && leadData.id} />
+          <CustomerForm
+            lead={leadData && leadData.id}
+            setIsModalOpen={setIsModalOpen}
+          />
         </ModalWrap>
         <Grid
           gridTemplateColumns="repeat(2, 1fr)"
@@ -109,11 +112,13 @@ const LeadView = () => {
           width="90%"
           pt={5}
         >
-          <CustomerCard />
-          <CustomerCard />
-          <CustomerCard />
-          <CustomerCard />
-          <CustomerCard />
+          {customersList && customersList.length > 0 ? (
+            customersList.map((customer) => (
+              <CustomerCard key={customer.id} customer={customer} />
+            ))
+          ) : (
+            <p>No Customers</p>
+          )}
         </Grid>
       </Flex>
     </>
