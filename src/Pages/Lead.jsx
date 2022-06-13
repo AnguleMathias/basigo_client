@@ -7,7 +7,6 @@ import {
   getAllLeadCustomers,
   reset as resetCustomers,
 } from "../features/customers/getAllCustomersSlice";
-
 import {
   getLeads,
   reset as resetLeads,
@@ -101,10 +100,7 @@ const LeadView = () => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         >
-          <CustomerForm
-            lead={leadData && leadData.id}
-            setIsModalOpen={setIsModalOpen}
-          />
+          <CustomerForm setIsModalOpen={setIsModalOpen} />
         </ModalWrap>
         <Grid
           gridTemplateColumns="repeat(2, 1fr)"

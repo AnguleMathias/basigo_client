@@ -1,12 +1,34 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { Flex, Image, IconButton, Text } from "@chakra-ui/core";
 
+import {
+  deleteCustomer,
+  reset,
+} from "../../features/customers/deleteCustomerSlice";
 import Card from "./Card";
 
 const CustomerCard = ({ lead, customer }) => {
-  const handleDelete = () => {};
+  console.log(lead);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleNavigateToCustomer = () => {};
+  const handleDelete = async () => {
+    await dispatch(deleteCustomer(customer.id));
+    window.location.reload();
+  };
+
+  const handleNavigateToCustomer = () => {
+    navigate(`/customer/${customer.id}`);
+  };
+
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [dispatch]);
 
   return (
     <Flex

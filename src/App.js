@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
+import Customer from "./pages/Customer";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Lead from "./pages/Lead";
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/" element={<Login />} />
             <Route path="/leads" element={<Dashboard />} />
             <Route path="/leads/:id" element={<Lead />} exact />
+            <Route path="/customer/:id" element={<Customer />} exact />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
