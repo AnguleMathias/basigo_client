@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "http://basigo.herokuapp.com";
 
 // create new lead
 const createLead = async (leadData, token) => {
