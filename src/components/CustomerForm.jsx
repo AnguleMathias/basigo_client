@@ -14,10 +14,10 @@ const CustomerForm = ({ lead, setIsModalOpen }) => {
     lastName: "",
     phone: "",
     location: "",
-    gender: "",
+    gender: "Male",
     photo: "",
     annualEarning: "",
-    productsOfInterest: "",
+    productsOfInterest: "product A",
     leadId: lead,
   });
 
